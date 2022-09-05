@@ -23,30 +23,14 @@ public class JpaMain {
 
         try {
 
-           /* Member member = new Member();
+            // 여기까지는 비영속. 아무상태도 아님.
+            Member member = new Member();
+            member.setId(100L);
+            member.setName("HelloJPA");
 
-            member.setId(2L); // Long 값
-            member.setName("helloB");
-
-            em.persist(member); // 저장*/
-
-
-            // jpql은 테이블 대상이 아닌 객체(Member 객체) 대상으로.
-            List<Member> result = em.createQuery("select m from Member as m", Member.class).getResultList();
-
-            for (Member member : result) {
-                System.out.println("member.name = " + member.getName());
-            }
-
-
-            /*
-             Member findMember = em.find(Member.class, 1L); // 찾고
-             findMember.setName("HelloJPA"); // 이름 수정하고
-             em.persist(findMember); // 저장? 안해도 됨.
-             값만 바꿨는데 어떻게 되는거지?
-             jpa가 변경이 됐는지 안됐는지 트랜잭션 커밋하기 직전에 다 체크.
-             바뀐게 있으면 업데이트 쿼리 날림. 트랜잭션 커밋 직전에.
-             */
+            // 여기서부터 영속상태
+            // em 내부에 영속성 컨텍스트 통해서 이 멤버가 관리됨.
+            em.persist(member);
 
             tx.commit(); // 정상이면 커밋하고
         } catch (Exception e) {
