@@ -6,14 +6,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-//@Table(name = "MEMBER")
+// @Table(name = "MBR")
 public class Member {
 
     @Id
     private Long id;
 
-//    @Column(name = name)
+//    @Column(unique = true, length = 10) // ddl 생성 기능. ddl 자동 생성 시에만 사용되고 jpa 실행 로직에는 영향 주지 않음
     private String name;
+    private int age;
 
     // jpa는 기본생성자 있어야 함.
     public Member() {

@@ -22,14 +22,13 @@ public class JpaMain {
         tx.begin(); // 트랜잭션 시작
 
         try {
-            System.out.println("~~~~~~~~~~~~");
             // 영속
-            Member member = new Member(200L, "member200");
-            em.persist(member);
-            System.out.println("=====1");
-            em.flush(); // 강제 호출
-            System.out.println("=====2");
-            System.out.println("=====3");
+            Member member = em.find(Member.class, 150L);
+            member.setName("AAA");
+
+            em.detach(member);
+
+            System.out.println("========");
             tx.commit();
 
         } catch (Exception e) {
